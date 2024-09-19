@@ -2,12 +2,12 @@
 // Gustavo César Barreto Santana
 //Artur Vinícius Lima dos Santos
 // 1) 
-const aluno =Object.freeze(function(nome,idade,matricula,curso) {
-    this.nome = String(nome)
-    this.idade = parseInt(Number(idade))
-    this.matricula= parseInt(Number(matricula))
-    this.curso= String(curso)
-})
+const aluno = (nome, idade, matricula, curso) => ({
+    nome: String(nome),
+    idade: parseInt(Number(idade)),
+    matricula: parseInt(Number(matricula)),
+    curso: String(curso)
+});
 
 // 2)
 const turma= Object.freeze([])
@@ -15,7 +15,7 @@ const turma= Object.freeze([])
 // 3)
 const adicionarAluno =Object.freeze(function(turma){
     return function(nome,idade,matricula,curso){
-    const novo = new aluno(nome,idade,matricula,curso)
+    const novo =  aluno(nome,idade,matricula,curso)
     const novaTurma =[...turma,novo]
     return novaTurma
     }
@@ -100,13 +100,13 @@ function editar(edit,turma=turmaOrdenada){
         const c = filtrado[0].curso
        return function(nome=n,idade=i,matricula=m,curso=c){
     if(typeof edit=="string"){
-        const editado = new aluno(nome,idade,matricula,curso)
+        const editado =  aluno(nome,idade,matricula,curso)
     const novaTurma=[...turma.filter((x)=> x.nome !== edit),editado]
     console.log(novaTurma)
     return novaTurma
     }
     else{
-        const editado = new aluno(nome,idade,matricula,curso)
+        const editado = aluno(nome,idade,matricula,curso)
         const novaTurma=[...turma.filter((x)=> x.matricula !== edit),editado]
         console.log(novaTurma)
         return novaTurma
